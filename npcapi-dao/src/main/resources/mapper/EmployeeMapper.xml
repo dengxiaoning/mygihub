@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.npcapi.dao.EmployeeDao">
+    <select id="getEmployeeTotal" resultType="java.lang.Integer">
+		SELECT COUNT(1) FROM
+		employee
+	</select>
+    <select id="getAllEmployee"
+            resultType="com.edu.npcapi.model.Employee"
+            parameterType="com.edu.npcapi.model.utils.Page">
+		SELECT
+		e.employee_id,
+		e.employee_account,
+		e.username,
+		e.`password`,
+		e.age,
+		e.address,
+		d.departmentname
+		FROM
+		employee e,
+		department d
+		WHERE
+		e.departmentid = d.departmentid LIMIT
+		#{startIndex},#{pageSize}
+	</select>
+</mapper>
